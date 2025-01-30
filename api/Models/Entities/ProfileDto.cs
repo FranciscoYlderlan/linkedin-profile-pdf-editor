@@ -3,11 +3,11 @@
     public class Profile
     {
         public string? Name { get; set; }
-        public List<ContactInfo>? ContactInfos { get; set; }
+        public List<ContactInfo>? ContactInfos { get; set; } = new();
         public string? About { get; set; }
-        public List<Experience>? Experiences { get; set; }
-        public List<Education>? Educations { get; set; }
-        public List<Certification>? Certifications { get; set; }
+        public List<Experience> Experiences { get; set; } = new();
+        public List<Education> Educations { get; set; } = new();
+        public List<Certification> Certifications { get; set; } = new();
     }
 
     public class ContactInfo
