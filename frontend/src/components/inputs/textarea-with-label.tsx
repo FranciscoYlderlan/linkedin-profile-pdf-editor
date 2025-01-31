@@ -1,6 +1,6 @@
 'use client'
 
-import { InputHTMLAttributes } from 'react'
+import { TextareaHTMLAttributes } from 'react'
 import { useFormContext } from 'react-hook-form'
 import {
   FormControl,
@@ -9,20 +9,20 @@ import {
   FormLabel,
   FormMessage,
 } from '../ui/form'
-import { Input } from '../ui/input'
+import { Textarea } from '../ui/textarea'
 
-type InputWithLabelProps<GenericSchema> = {
+type TextareaWithLabelProps<GenericSchema> = {
   fieldTitle: string
   nameInSchema: keyof GenericSchema & string
   className?: string
-} & InputHTMLAttributes<HTMLInputElement>
+} & TextareaHTMLAttributes<HTMLTextAreaElement>
 
-export function InputWithLabel<GenericSchema>({
+export function TextareaWithLabel<GenericSchema>({
   fieldTitle,
   nameInSchema,
   className,
   ...props
-}: InputWithLabelProps<GenericSchema>) {
+}: TextareaWithLabelProps<GenericSchema>) {
   const form = useFormContext()
   return (
     <FormField
@@ -34,9 +34,9 @@ export function InputWithLabel<GenericSchema>({
             {fieldTitle}
           </FormLabel>
           <FormControl>
-            <Input
+            <Textarea
               id={nameInSchema}
-              className={`disabled:opacity-75 ${className}`}
+              className={`p-4 disabled:opacity-75 ${className}`}
               {...props}
               {...field}
             />
