@@ -1,35 +1,46 @@
 import { z } from 'zod'
 
-export const contactInfoSchema = z.object({
-  header: z.string().optional(),
-  links: z.array(z.string()).optional(),
+const contactInfoSchema = z.object({
+  header: z.string().min(1, 'Header cannot be empty'),
+  links: z
+    .array(z.string().min(1, 'Link cannot be empty'))
+    .min(1, 'At least one link is required'),
 })
 
-export const experienceSchema = z.object({
-  company: z.string().optional(),
-  duration: z.string().optional(),
-  jobTitle: z.string().optional(),
-  description: z.string().optional(),
+const experienceSchema = z.object({
+  company: z.string().min(1, 'Company cannot be empty'),
+  duration: z.string().min(1, 'Duration cannot be empty'),
+  jobTitle: z.string().min(1, 'Job title cannot be empty'),
+  description: z.string().min(1, 'Description cannot be empty'),
 })
 
-export const educationSchema = z.object({
-  institution: z.string().optional(),
-  degree: z.string().optional(),
+const educationSchema = z.object({
+  institution: z.string().min(1, 'Institution cannot be empty'),
+  degree: z.string().min(1, 'Degree cannot be empty'),
 })
 
-export const certificationSchema = z.object({
-  certificationName: z.string().optional(),
-  issuer: z.string().optional(),
-  dateIssued: z.string().optional(),
+const certificationSchema = z.object({
+  certificationName: z.string().min(1, 'Certification name cannot be empty'),
+  issuer: z.string().min(1, 'Issuer cannot be empty'),
+  dateIssued: z.string().min(1, 'Date issued cannot be empty'),
 })
 
-export const profileSchema = z.object({
-  name: z.string().optional(),
-  contactInfos: z.array(contactInfoSchema).default([]),
-  about: z.string().optional(),
-  experiences: z.array(experienceSchema).default([]),
-  educations: z.array(educationSchema).default([]),
-  certifications: z.array(certificationSchema).default([]),
+const ProfileSchema = z.object({
+  name: z.string().min(1, 'Name cannot be empty'),
+  contactInfos: z
+    .array(contactInfoSchema)
+    .min(1, 'At least one contact info is required'),
+  about: z.string().min(1, 'About section cannot be empty'),
+  experiences: z
+    .array(experienceSchema)
+    .min(1, 'At least one experience is required'),
+  educations: z
+    .array(educationSchema)
+    .min(1, 'At least one education is required'),
+  certifications: z
+    .array(certificationSchema)
+    .min(1, 'At least one certification is required'),
 })
 
-export type ProfileSchema = z.infer<typeof profileSchema>
+type ProfileSchemaType = z.infer<typeof ProfileSchema>
+export { ProfileSchema, type ProfileSchemaType }

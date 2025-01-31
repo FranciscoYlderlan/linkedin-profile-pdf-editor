@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const LinkedInSchema = z.object({
+const LinkedInSchema = z.object({
   linkedinUrl: z
     .string()
     .url('Invalid LinkedIn URL')
@@ -9,3 +9,7 @@ export const LinkedInSchema = z.object({
       'Must be a valid LinkedIn profile URL'
     ),
 })
+
+type LinkedInSchemaType = z.infer<typeof LinkedInSchema>
+
+export { LinkedInSchema, type LinkedInSchemaType }
